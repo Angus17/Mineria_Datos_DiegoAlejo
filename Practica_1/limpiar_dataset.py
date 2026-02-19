@@ -3,8 +3,6 @@
 # Eliminar filas con valores faltantes
 # Eliminar filas con ruido en el log
 # Transformar datos para que sean más fáciles de analizar (por ejemplo, convertir fechas a un formato estándar)
-# Normalizar datos para que estén en la misma escala
-# Codificar variables categóricas para que puedan ser utilizadas en modelos de machine learning, etc.
 
 import pandas as pd
 
