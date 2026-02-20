@@ -15,7 +15,7 @@ map_severidades = {val: i+1 for i, val in enumerate(df['Nivel_Severidad'].unique
 sql_usuarios = [f"INSERT INTO usuario (id_usuario, nombre) VALUES ({id_val}, '{nombre}');" 
                 for nombre, id_val in map_usuarios.items()]
 
-# Ojo: Tu tabla se llama tipo_proceso, no tipos_proceso
+
 sql_tipos_proceso = [f"INSERT INTO tipo_proceso (id_tipo_proceso, tipo_de_proceso) VALUES ({id_val}, '{tipo}');" 
                      for tipo, id_val in map_tipos.items()]
 
@@ -37,7 +37,6 @@ for index, row in df.iterrows():
     # Escapar comillas simples en el mensaje de log para que MySQL no arroje error de sintaxis
     mensaje_seguro = str(row['MensajeLog']).replace("'", "''")
     
-    # Se corrige row['pid'] por row['PID']
     sql = (f"INSERT INTO logs_sistema (fecha_proceso, id_usuario, id_proceso, id_tipo_proceso, pid, "
            f"uso_cpu, uso_ram, estado_proceso, longitud_mensaje, mensaje_log, id_severidad, is_error) "
            f"VALUES ('{row['FechaProceso']}', {id_usr}, {id_proc}, {id_tipo}, {row['PID']}, "
