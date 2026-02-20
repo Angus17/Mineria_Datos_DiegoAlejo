@@ -46,10 +46,10 @@ print("\n--- Estadísticas agrupadas por SEVERIDAD ---")
 stats_severidad = df.groupby('Nivel_Severidad')['Uso_RAM'].describe()
 print(stats_severidad)
 
-# # Para una mejor visualización, pasamos las estadisticas a un Excel
-# with pd.ExcelWriter(os.getenv('STATISTICS_EXCEL')) as writer:
-#     stats_numericas.to_excel(writer, sheet_name='Estadísticas Numéricas')
-#     stats_categoricas.to_excel(writer, sheet_name='Estadísticas Categóricas')
-#     stats_usuario.to_excel(writer, sheet_name='Agrupado por Usuario')
-#     stats_proceso.to_excel(writer, sheet_name='Agrupado por Proceso')
-#     stats_severidad.to_excel(writer, sheet_name='Agrupado por Severidad')
+# Para una mejor visualización, pasamos las estadisticas a un Excel
+with pd.ExcelWriter(os.getenv('STATISTICS_EXCEL')) as writer:
+    stats_numericas.to_excel(writer, sheet_name='Estadísticas Numéricas')
+    stats_categoricas.to_excel(writer, sheet_name='Estadísticas Categóricas')
+    stats_usuario.to_excel(writer, sheet_name='Agrupado por Usuario')
+    stats_proceso.to_excel(writer, sheet_name='Agrupado por Proceso')
+    stats_severidad.to_excel(writer, sheet_name='Agrupado por Severidad')
