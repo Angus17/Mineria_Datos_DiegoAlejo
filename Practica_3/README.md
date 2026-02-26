@@ -186,6 +186,7 @@ Los diagramas de caja son vitales para identificar valores que se salen de la no
 
 - **Boxplot de CPU:** Se observan múltiples *outliers* que superan el 100%. Estos representan picos de actividad de aplicaciones multihilo (como el entorno de desarrollo u otras herramientas de usuario).
 - **Boxplot de RAM:** Los puntos por encima del "bigote" superior indican procesos que, aunque estadísticamente atípicos, llegan a consumir hasta un 2.5% de la memoria disponible durante eventos específicos.
+- **Boxplot de Longitud de Mensaje:** El diagrama revela una distribución altamente asimétrica en la verbosidad del sistema. La caja principal comprimida cerca del cero indica que la inmensa mayoría de los logs son mensajes muy cortos y concisos. La densa línea de puntos superiores muestran eventos esporádicos pero sumamente extensos (alcanzando hasta ~2,500 caracteres). Estos picos corresponden a registros detallados como *stack traces* de errores, alertas complejas o volcados de memoria de ciertas aplicaciones.
 
 ### 3. Proporciones y Categorías (Pie Charts)
 
@@ -193,6 +194,7 @@ Se utilizaron líneas de enlace para una lectura clara de las proporciones.
 
 - **Proporción por Usuario:** El usuario `root` domina con el 58.7% de los logs, reflejando la actividad constante de los demonios del kernel de Linux.
 - **Nivel de Severidad:** El 93% de los registros son de nivel `INFO`, lo que indica un sistema altamente estable con pocos errores críticos interrumpiendo el flujo.
+- **Tipo de Proceso:** La proporción muestra que en su mayoría son logs orientados al Kernel del sistema Linux.
 
 ### 4. Gráficas de Barras (Top 10)
 
@@ -200,6 +202,7 @@ Permiten comparar rápidamente el volumen de actividad entre diferentes actores 
 
 - **Bar Plot de Procesos:** Identifica a los servicios de sistema y el kernel como los principales emisores de ruido dentro de `journalctl`.
 - **Bar Plot de Severidad:** Cuantifica visualmente la desproporción masiva entre mensajes puramente informativos frente a las advertencias y fallos reales.
+- **Bar Plot de Usuarios:** Identifica la cantidad de Logs generado por los primeros 10 usuarios del sistema Ubuntu, como resultado final, `root` es el usuario que genera más logs.
 
 ### 5. Análisis de Correlación (Scatter Plots)
 
