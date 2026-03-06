@@ -219,6 +219,10 @@ Exploran si existe una relación de dependencia directa entre variables clave de
 - **Procesos del Kernel dominan:** El tipo de proceso más frecuente es `Sistema (Kernel)`, seguido de `Usuario (Aplicación)`, consistente con la naturaleza del `journalctl`.
 - **Correlaciones débiles:** Los scatter plots muestran que no hay una correlación lineal fuerte entre CPU y RAM, ni entre longitud de mensaje y CPU, lo cual sugiere que cada variable aporta información independiente al análisis.
 
+El sistema opera en un estado de reposo altamente eficiente, donde los picos de consumo son causados por aplicaciones de usuario y no por el sistema operativo base.
+
+**La Evidencia:** Cerca del 93% de los logs corresponden a la severidad 'INFO', y el usuario root genera el 58.7% de la actividad en segundo plano. Los diagramas de dispersión demostraron que no existe correlación lineal (R ≈ 0) entre el consumo de CPU y RAM.
+
 ---
 **Curso:** Minería de Datos\
 **Autor:** Diego Leonardo Alejo Cantú\
