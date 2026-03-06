@@ -24,7 +24,7 @@ Implementar un árbol de decisión estadístico en Python que evalúe los supues
 ## 🛠 Requisitos Previos
 
 - **Python 3.x**
-- Librerías: `pip install pandas seaborn matplotlib scipy`
+- Librerías: `pip install pandas seaborn matplotlib scipy numpy`
 - El archivo CSV limpio generado en la Práctica 1.
 - Variables de entorno configuradas (`DATASET` y `GRAFICA_ESTADISTICA`).
 
