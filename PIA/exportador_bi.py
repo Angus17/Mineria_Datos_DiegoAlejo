@@ -92,37 +92,43 @@ def plotRadarAmenazas(ruta_salida):
 '''
 
 def plotRelojArenaForecasting(ruta_salida):
-    """Gráfica 3: Series de tiempo previniendo la saturación"""
-    dias = pd.date_range(start='2026-05-01', periods=60)
+    """Gráfica 3: Series de tiempo previniendo la saturación (Fechas corregidas)"""
+    # Empezamos el historial el 9 de abril de 2026 para que el corte histórico (día 45) caiga exactamente a finales de mayo de 2026.
+    dias = pd.date_range(start='2026-04-09', periods=60)
+    
+    # 45 días de historia real (Abril -> Finales de Mayo)
     consumo_historico = nump.linspace(40, 75, 45) + nump.random.normal(0, 3, 45)
-
-    ultimo_valor = consumo_historico[-1]
-    prediccion = nump.linspace(ultimo_valor, 95, 16)
+    
+    # 15 días de predicción hacia el futuro (Finales de Mayo -> Junio)
+    ultimo_valor_historico = consumo_historico[-1]
+    prediccion = nump.linspace(ultimo_valor_historico, 95, 16)
     
     limite_inferior = prediccion - 5
     limite_superior = prediccion + 5
     
     plt.figure(figsize=(12, 6))
     
-    # Datos históricos (45 puntos)
+    # Datos históricos
     plt.plot(dias[:45], consumo_historico, color='#2980b9', label='Consumo Histórico', linewidth=2)
-    
-    # Proyección (16 puntos, conectando con el último día histórico)
+    # Proyección
     plt.plot(dias[44:], prediccion, color='#e67e22', linestyle='--', label='Predicción (Forecasting)', linewidth=2)
-    
     # Cono de incertidumbre
     plt.fill_between(dias[44:], limite_inferior, limite_superior, color='#e67e22', alpha=0.2, label='Margen de Error')
     
     # Línea fatal de saturación
     plt.axhline(y=90, color='#c0392b', linestyle='-.', linewidth=2, label='Límite Crítico (90% - Riesgo de Caída)')
     
-    # Resaltar el punto de cruce dinámicamente
+    # Resaltar el punto de cruce
     fecha_caida = dias[44 + nump.argmax(prediccion >= 90)]
     plt.scatter([fecha_caida], [90], color='red', s=100, zorder=5)
-    plt.annotate('Punto de Quiebre Proyectado', 
+    
+    # Formatear la fecha para que se vea bonita en el texto
+    fecha_texto = fecha_caida.strftime('%d de %b')
+    plt.annotate(f'Punto de Quiebre\n({fecha_texto})', 
                  xy=(fecha_caida, 90), 
-                 xytext=(fecha_caida - pd.Timedelta(days=15), 95),
-                 arrowprops=dict(facecolor='black', shrink=0.05, width=1, headwidth=6))
+                 xytext=(fecha_caida - pd.Timedelta(days=12), 95),
+                 arrowprops=dict(facecolor='black', shrink=0.05, width=1, headwidth=6),
+                 fontweight='bold')
     
     plt.title("Proyección de Saturación de RAM a 15 Días", fontweight='bold', pad=20)
     plt.ylabel("Consumo de RAM (GB o %)")
